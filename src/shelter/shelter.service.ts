@@ -86,6 +86,8 @@ export class ShelterService implements OnModuleInit {
         capacity: true,
         contact: shouldShowContact,
         petFriendly: true,
+        shelteredPets: true,
+        petsCapacity: true,
         prioritySum: true,
         latitude: true,
         longitude: true,
@@ -165,6 +167,8 @@ export class ShelterService implements OnModuleInit {
         zipCode: true,
         capacity: true,
         petFriendly: true,
+        shelteredPets: true,
+        petsCapacity: true,
         shelteredPeople: true,
         prioritySum: true,
         verified: true,
@@ -316,7 +320,7 @@ export class ShelterService implements OnModuleInit {
       shelterSupplies
         .map(this.parseShelterSupply)
         .filter((f) =>
-          this.canDecayShelterSupply(f, [SupplyPriority.Urgent], 12),
+          this.canDecayShelterSupply(f, [SupplyPriority.Urgent], 48),
         ),
 
       SupplyPriority.Needing,
@@ -329,7 +333,7 @@ export class ShelterService implements OnModuleInit {
           this.canDecayShelterSupply(
             f,
             [SupplyPriority.Needing, SupplyPriority.Remaining],
-            48,
+            72,
           ),
         ),
       SupplyPriority.UnderControl,

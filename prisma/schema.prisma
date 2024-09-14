@@ -48,6 +48,7 @@ model User {
   shelterManagers ShelterManagers[]
   suppliesHistory SupplyHistory[]
   donationOrders  DonationOrder[]
+  shelterUsers    ShelterUsers[]
 
   @@map("users")
 }
@@ -119,6 +120,8 @@ model Shelter {
   streetNumber    String?         @map("street_number")
   zipCode         String?         @map("zip_code")
   petFriendly     Boolean?        @map("pet_friendly")
+  shelteredPets   Int?            @map("sheltered_pets")
+  petsCapacity    Int?            @map("pets_capacity")
   shelteredPeople Int?            @map("sheltered_people")
   capacity        Int?
   contact         String?
@@ -134,7 +137,8 @@ model Shelter {
   shelterManagers ShelterManagers[]
   shelterSupplies ShelterSupply[]
   supplyHistories SupplyHistory[]
-  DonationOrder   DonationOrder[]
+  donationOrders  DonationOrder[]
+  shelterUsers    ShelterUsers[]
 
   @@map("shelters")
 }
@@ -221,4 +225,16 @@ model DonationOrder {
   donationOrderSupplies DonationOrderSupply[]
 
   @@map("donation_orders")
+}
+
+model ShelterUsers {
+  userId    String @map("user_id")
+  shelterId String @map("shelter_id")
+  createdAt String @map("created_at") @db.VarChar(32)
+
+  user    User    @relation(fields: [userId], references: [id])
+  shelter Shelter @relation(fields: [shelterId], references: [id])
+
+  @@id([userId, shelterId])
+  @@map("shelter_users")
 }
